@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.gestion.model.Sportif" table="Sportif">
+        <id name="code" type="string" column="code">
+            <generator class="assigned"/>
+        </id>
+        
+        <property name="nom" type="string" column="nom" not-null="true"/>
+        <property name="prenom" type="string" column="prenom" not-null="true"/>
+        <property name="age" type="int" column="age" not-null="true"/>
+        <property name="sexe" type="string" column="sexe" not-null="true"/>
+        <property name="pays" type="string" column="pays" not-null="true"/>
+        <property name="discipline" type="string" column="discipline"/>
+    </class>
+</hibernate-mapping>

@@ -16,14 +16,25 @@ GestionCommandes/bin/
 GestionCommandes/.idea/
 GestionCommandes/*.iml
 
-GestionCommandes/target/
-GestionCommandes/.settings/
-GestionCommandes/.project
-GestionCommandes/.classpath
-GestionCommandes/*.class
-GestionCommandes/bin/
-GestionCommandes/.idea/
-GestionCommandes/*.iml
+
+GestionInscriptionSportif/target/
+GestionInscriptionSportif/.settings/
+GestionInscriptionSportif/.project
+GestionInscriptionSportif/.classpath
+GestionInscriptionSportif/*.class
+GestionInscriptionSportif/bin/
+GestionInscriptionSportif/.idea/
+GestionInscriptionSportif/*.iml
+
+GestionInscriptionSportifHibernate/target/
+GestionInscriptionSportifHibernate/.settings/
+GestionInscriptionSportifHibernate/.project
+GestionInscriptionSportifHibernate/.classpath
+GestionInscriptionSportifHibernate/*.class
+GestionInscriptionSportifHibernate/bin/
+GestionInscriptionSportifHibernate/.idea/
+GestionInscriptionSportifHibernate/*.iml
+
 
 
 

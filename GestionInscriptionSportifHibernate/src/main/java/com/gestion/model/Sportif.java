@@ -1,6 +1,7 @@
 package com.gestion.model;
 
 public class Sportif {
+    
     private String code;
     private String nom;
     private String prenom;

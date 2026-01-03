@@ -35,6 +35,15 @@ GestionInscriptionSportifHibernate/bin/
 GestionInscriptionSportifHibernate/.idea/
 GestionInscriptionSportifHibernate/*.iml
 
+GestionCommandes/target/
+GestionCommandes/.settings/
+GestionCommandes/.project
+GestionCommandes/.classpath
+GestionCommandes/*.class
+GestionCommandes/bin/
+GestionCommandes/.idea/
+GestionCommandes/*.iml
+
 
 
 

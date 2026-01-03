@@ -35,14 +35,15 @@ GestionInscriptionSportifHibernate/bin/
 GestionInscriptionSportifHibernate/.idea/
 GestionInscriptionSportifHibernate/*.iml
 
-projectCommandes/target/
-projectCommandes/.settings/
-projectCommandes/.project
-projectCommandes/.classpath
-projectCommandes/*.class
-projectCommandes/bin/
-projectCommandes/.idea/
-projectCommandes/*.iml
+ProjetCommandes/.metadata/
+ProjetCommandes/.recommenders/
+ProjetCommandes/RemoteSystemsTempFiles/
+ProjetCommandes/Servers/
+ProjetCommandes/.settings/
+ProjetCommandes/.classpath
+ProjetCommandes/.project
+ProjetCommandes/.factorypath
+ProjetCommandes/*.launch
 
 
 

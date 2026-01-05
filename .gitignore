@@ -46,6 +46,11 @@ ProjetCommandes/.factorypath
 ProjetCommandes/*.launch
 
 
-
+GestionClientMVC/.settings/
+GestionClientMVC/.project
+GestionClientMVC/.classpath
+GestionClientMVC/.factorypath
+GestionClientMVC/*.log
+GestionClientMVC/temp/
 
 

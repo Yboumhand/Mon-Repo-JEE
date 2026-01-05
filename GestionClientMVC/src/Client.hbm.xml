@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+    <!-- ================================================ -->
+    <!-- MAPPING DE LA CLASSE CLIENT                      -->
+    <!-- ================================================ -->
+    
+    <!-- class : Classe Java à mapper -->
+    <!-- table : Nom de la table dans MySQL -->
+    <class name="entities.Client" table="Table_Client">
+        
+        <!-- ============================================ -->
+        <!-- CLÉ PRIMAIRE                                 -->
+        <!-- ============================================ -->
+        
+        <!-- id : Clé primaire -->
+        <id name="code" column="code" type="java.lang.Long">
+            <!-- Stratégie de génération automatique -->
+            <!-- identity : AUTO_INCREMENT MySQL -->
+            <generator class="identity"/>
+        </id>
+        
+        <!-- ============================================ -->
+        <!-- PROPRIÉTÉS / COLONNES                        -->
+        <!-- ============================================ -->
+        
+        <!-- property : Attribut de la classe -->
+        <!-- column : Nom de la colonne dans la table -->
+        <!-- type : Type de donnée -->
+        <!-- not-null : Colonne obligatoire -->
+        <!-- length : Taille maximale pour String -->
+        
+        <property name="nom" column="nom" type="string" not-null="true" length="50"/>
+        
+        <property name="prenom" column="prenom" type="string" not-null="true" length="50"/>
+        
+        <property name="age" column="age" type="int" not-null="true"/>
+        
+        <property name="ville" column="ville" type="string" length="100"/>
+        
+    </class>
+    
+</hibernate-mapping>
+
+<!--
+EXPLICATION DU MAPPING :
+
+Structure de la table MySQL créée :
+
+CREATE TABLE Table_Client (
+    code BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    age INT NOT NULL,
+    ville VARCHAR(100)
+);
+
+CORRESPONDANCE :
+┌──────────────────┬───────────────────┬──────────────────┐
+│ Classe Java      │ Fichier HBM       │ Table MySQL      │
+├──────────────────┼───────────────────┼──────────────────┤
+│ Client           │ <class>           │ Table_Client     │
+│ Long code        │ <id>              │ code (PK)        │
+│ String nom       │ <property>        │ nom VARCHAR      │
+│ String prenom    │ <property>        │ prenom VARCHAR   │
+│ int age          │ <property>        │ age INT          │
+│ String ville     │ <property>        │ ville VARCHAR    │
+└──────────────────┴───────────────────┴──────────────────┘
+
+STRATÉGIES DE GÉNÉRATION ID :
+
+1. identity : AUTO_INCREMENT (MySQL, SQL Server)
+   - La base génère l'ID automatiquement
+   
+2. sequence : Séquence (Oracle, PostgreSQL)
+   - Utilise une séquence de la base
+   
+3. increment : Hibernate génère l'ID
+   - Attention aux problèmes de concurrence
+   
+4. assigned : Vous devez fournir l'ID manuellement
+   - Pas de génération automatique
+
+ALTERNATIVE : UTILISER LES ANNOTATIONS JPA
+
+Au lieu de Client.hbm.xml, vous pouvez annoter la classe :
+
+@Entity
+@Table(name = "Table_Client")
+public class Client {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
+    private Long code;
+    
+    @Column(name = "nom", nullable = false, length = 50)
+    private String nom;
+    
+    // ... etc
+}
+
+Puis dans hibernate.cfg.xml, remplacez :
+<mapping resource="Client.hbm.xml"/>
+par :
+<mapping class="entities.Client"/>
+-->

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- ================================================ -->
+    <!-- CONFIGURATION DES BEANS (COUCHE DAO ET SERVICE) -->
+    <!-- ================================================ -->
+    
+    <!-- 1. Bean DAO - Accès aux données -->
+    <bean id="clientDAO" class="dao.ImpClientDAO">
+        <!-- Pas de propriétés à injecter pour ce DAO -->
+    </bean>
+    
+    <!-- 2. Bean Service - Logique métier -->
+    <bean id="clientService" 
+          class="service.ImpClientService"
+          init-method="initialiser">
+        
+        <!-- Injection de dépendance : le service utilise le DAO -->
+        <property name="clientDAO" ref="clientDAO"/>
+    </bean>
+    
+    <!-- ================================================ -->
+    <!-- SCAN AUTOMATIQUE DES ANNOTATIONS (Optionnel)     -->
+    <!-- ================================================ -->
+    
+    <!-- Active le scan des annotations @Service, @Repository, etc. -->
+    <context:annotation-config/>
+    
+    <!-- Scanner les packages pour détecter automatiquement les beans -->
+    <!-- <context:component-scan base-package="dao, service"/> -->
+    
+</beans>
+
+<!--
+EXPLICATION DES BALISES :
+
+1. <bean id="..." class="...">
+   - Déclare un bean Spring (objet géré par Spring)
+   - id : nom unique du bean
+   - class : classe Java complète
+   
+2. init-method="initialiser"
+   - Méthode appelée après la création du bean
+   - Ici : ImpClientService.initialiser()
+   
+3. <property name="..." ref="...">
+   - Injection de dépendance
+   - name : nom de la propriété (setter setClientDAO)
+   - ref : référence vers un autre bean
+   - Équivalent à : clientService.setClientDAO(clientDAO);
+   
+4. <context:annotation-config/>
+   - Active les annotations Spring (@Autowired, etc.)
+
+POURQUOI CE FICHIER ?
+- Spring crée et gère les objets automatiquement
+- Injection de dépendance : pas besoin de "new"
+- Un seul objet Service, un seul objet DAO (Singleton)
+-->

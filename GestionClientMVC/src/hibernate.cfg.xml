@@ -33,7 +33,7 @@
         
         <!-- Dialecte SQL pour MySQL -->
         <property name="hibernate.dialect">
-            org.hibernate.dialect.MySQL8Dialect
+            org.hibernate.dialect.MariaDB103Dialect
         </property>
         
         <!-- Afficher les requêtes SQL dans la console (utile pour debug) -->

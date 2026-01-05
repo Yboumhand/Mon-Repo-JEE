@@ -2,7 +2,6 @@ package controller;
 
 import entities.Client;
 import service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +21,11 @@ import java.util.List;
 public class ClientController {
     
     // Injection de dépendance automatique par Spring
-    @Autowired
     private ClientService clientService;
+    
+    ClientController (ClientService clientService){
+    	this.clientService=clientService;
+    }
     
     /**
      * Page d'accueil - Affiche le formulaire et la liste des clients

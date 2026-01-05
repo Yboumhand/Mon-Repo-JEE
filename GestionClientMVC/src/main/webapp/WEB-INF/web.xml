@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>GestionClientMVC</display-name>
-  <!-- 1. Chargement du contexte Spring au démarrage -->
-  <context-param>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+    
+    <!-- Nom de l'application -->
+    <display-name>GestionClient</display-name>
+    
+    <!-- Page d'accueil par défaut -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <!-- ================================================ -->
+    <!-- CONFIGURATION SPRING MVC                          -->
+    <!-- ================================================ -->
+    
+    <!-- 1. Chargement du contexte Spring au démarrage -->
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
@@ -14,6 +30,11 @@
         </listener-class>
     </listener>
     
+    <!-- ================================================ -->
+    <!-- DISPATCHER SERVLET (Contrôleur frontal Spring)   -->
+    <!-- ================================================ -->
+    
+    <!-- 2. Configuration du DispatcherServlet -->
     <servlet>
         <servlet-name>springDispatcher</servlet-name>
         <servlet-class>
@@ -37,5 +58,50 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
+    <!-- ================================================ -->
+    <!-- ENCODAGE UTF-8 (pour les caractères spéciaux)   -->
+    <!-- ================================================ -->
+    
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     
 </web-app>
+
+<!-- 
+EXPLICATION DES BALISES IMPORTANTES :
+
+1. <context-param> : Paramètres globaux de l'application
+   - contextConfigLocation : Chemin vers applicationContext.xml
+
+2. <listener> : ContextLoaderListener charge le contexte Spring au démarrage
+
+3. <servlet> : Définit le DispatcherServlet (cœur de Spring MVC)
+   - Il intercepte toutes les requêtes HTTP
+   - Il route vers les bons contrôleurs (@Controller)
+
+4. <servlet-mapping> : Définit quelles URLs sont gérées
+   - "/" signifie TOUTES les URLs
+
+5. <filter> : CharacterEncodingFilter pour l'UTF-8
+   - Évite les problèmes d'accents
+
+FLUX D'UNE REQUÊTE :
+User → Tomcat → web.xml → DispatcherServlet → Controller → Service → DAO → DB
+-->

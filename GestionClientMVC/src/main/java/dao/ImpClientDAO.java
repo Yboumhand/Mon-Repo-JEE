@@ -1,11 +1,12 @@
 package dao;
 
 import entities.Client;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 
 import java.util.List;
 
@@ -23,7 +24,6 @@ public class ImpClientDAO implements ClientDAO {
             // Création de la SessionFactory à partir de hibernate.cfg.xml
             sessionFactory = new Configuration()
                     .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Client.class)
                     .buildSessionFactory();
         } catch (Exception e) {
             System.err.println("Erreur lors de la création de SessionFactory : " + e);
@@ -82,7 +82,7 @@ public class ImpClientDAO implements ClientDAO {
             transaction = session.beginTransaction();
             
             // Récupérer le client
-            Client client = session.get(Client.class, code);
+            Client client = (Client) session.get(Client.class, code);
             
             if (client != null) {
                 // Supprimer le client
@@ -119,7 +119,7 @@ public class ImpClientDAO implements ClientDAO {
             session = sessionFactory.openSession();
             
             // Récupérer le client
-            client = session.get(Client.class, code);
+            client = (Client) session.get(Client.class, code);
             
             if (client != null) {
                 System.out.println("✅ Client trouvé : " + client);
@@ -151,7 +151,7 @@ public class ImpClientDAO implements ClientDAO {
             session = sessionFactory.openSession();
             
             // HQL (Hibernate Query Language)
-            Query<Client> query = session.createQuery("FROM Client", Client.class);
+            Query query = session.createQuery("FROM Client");
             clients = query.list();
             
             System.out.println("✅ Nombre de clients récupérés : " + clients.size());

@@ -36,6 +36,11 @@ GestionInscriptionSportifHibernate/.idea/
 GestionInscriptionSportifHibernate/*.iml
 
 
-
+GestionClientMVC/.settings/
+GestionClientMVC/.project
+GestionClientMVC/.classpath
+GestionClientMVC/.factorypath
+GestionClientMVC/*.log
+GestionClientMVC/temp/
 
 

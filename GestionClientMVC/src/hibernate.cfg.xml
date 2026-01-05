@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        
+        <!-- ================================================ -->
+        <!-- CONFIGURATION DE LA BASE DE DONNÉES             -->
+        <!-- ================================================ -->
+        
+        <!-- 1. Driver JDBC pour MySQL -->
+        <property name="hibernate.connection.driver_class">
+            com.mysql.cj.jdbc.Driver
+        </property>
+        
+        <!-- 2. URL de connexion à la base de données -->
+        <!-- Format : jdbc:mysql://[host]:[port]/[database] -->
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/DBClients?useSSL=false&amp;serverTimezone=UTC
+        </property>
+        
+        <!-- 3. Nom d'utilisateur MySQL -->
+        <property name="hibernate.connection.username">root</property>
+        
+        <!-- 4. Mot de passe MySQL -->
+        <property name="hibernate.connection.password"></property>
+        
+        <!-- ================================================ -->
+        <!-- PROPRIÉTÉS HIBERNATE                             -->
+        <!-- ================================================ -->
+        
+        <!-- Dialecte SQL pour MySQL -->
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQL8Dialect
+        </property>
+        
+        <!-- Afficher les requêtes SQL dans la console (utile pour debug) -->
+        <property name="hibernate.show_sql">true</property>
+        
+        <!-- Formater les requêtes SQL (plus lisible) -->
+        <property name="hibernate.format_sql">true</property>
+        
+        <!-- Gestion automatique du schéma de base de données -->
+        <!-- update : crée/met à jour les tables automatiquement -->
+        <!-- create : supprime et recrée les tables à chaque démarrage -->
+        <!-- validate : vérifie que les tables correspondent aux entités -->
+        <!-- none : ne fait rien -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        
+        <!-- Pool de connexions (nombre de connexions maintenues) -->
+        <property name="hibernate.connection.pool_size">10</property>
+        
+        <!-- Cache de second niveau (optionnel) -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        
+        <!-- ================================================ -->
+        <!-- MAPPING DES ENTITÉS                              -->
+        <!-- ================================================ -->
+        
+        <!-- Fichier de mapping XML (si vous utilisez XML au lieu d'annotations) -->
+        <mapping resource="Client.hbm.xml"/>
+        
+        <!-- OU utiliser les annotations (recommandé) -->
+        <!-- <mapping class="entities.Client"/> -->
+        
+    </session-factory>
+</hibernate-configuration>
+
+<!--
+EXPLICATION DES PROPRIÉTÉS :
+
+1. connection.driver_class
+   - Driver JDBC pour communiquer avec MySQL
+   - com.mysql.cj.jdbc.Driver pour MySQL 8+
+   - com.mysql.jdbc.Driver pour MySQL 5.x
+
+2. connection.url
+   - Adresse de la base de données
+   - localhost:3306 = serveur local, port par défaut
+   - DBClients = nom de la base
+   - useSSL=false = désactive SSL (pour développement)
+   - serverTimezone=UTC = fuseau horaire
+
+3. hibernate.dialect
+   - Adapte les requêtes SQL au type de base de données
+   - MySQL8Dialect pour MySQL 8
+   - MySQL5Dialect pour MySQL 5.x
+
+4. show_sql et format_sql
+   - Affiche les requêtes SQL dans la console
+   - Très utile pour comprendre ce que fait Hibernate
+
+5. hbm2ddl.auto
+   - update : Crée les tables si elles n'existent pas, les met à jour sinon
+   - create : ATTENTION ! Supprime et recrée les tables à chaque fois
+   - validate : Vérifie seulement que tout correspond
+   
+   Pour la production, utilisez "validate" ou "none"
+
+AVANT DE LANCER :
+1. Créez la base de données MySQL :
+   CREATE DATABASE DBClients;
+
+2. Mettez votre mot de passe MySQL dans <password>
+
+3. Vérifiez que MySQL tourne sur le port 3306
+-->
